@@ -1,0 +1,34 @@
+body{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+img{
+    width: 100%;
+}
+
+h1{
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+@media (min-width:1440px) {
+    body{
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+
+    .photo, .film{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .photo1, .photo2, .photo3, .film1, .film2, .film3{
+        padding: 1rem;
+    }
+
+    .photo1, .film1{
+        grid-column: 1;
+    }
+}
