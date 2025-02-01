@@ -3,6 +3,10 @@ body{
     margin-right: 2rem;
 }
 
+header{
+    background-image: linear-gradient(to right bottom,rgba(100,233,225,1) 0%, rgba(240,244,245,1) 30%, rgba(100,233,225,1) 52%, rgba(240,244,245,1) 68%, rgba(34,210,231,1) 96%);
+}
+
 img{
     width: 100%;
 }
@@ -10,25 +14,45 @@ img{
 h1{
     font-size: 3.5rem;
     text-align: center;
+    text-shadow: 30px 20px #558ABB;
+}
+
+.left{
+    transform: skewY(-50deg);
+    width: 150px;
+    height: 80px;
+    
+}
+
+.right{
+    transform: skewY(50deg);
+    width: 150px;
+    height: 80px;
+    text-align: right;
 }
 
 @media (min-width:1440px) {
+
     body{
         margin-left: 5rem;
         margin-right: 5rem;
     }
 
-    .photo, .film{
+    h1{
+        font-size: 5rem;
+    }
+
+    .photo, .film, .painting{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;
     }
 
-    .photo1, .photo2, .photo3, .film1, .film2, .film3{
+    section{
         padding: 1rem;
     }
 
-    .photo1, .film1{
+    .photo1, .film1, .painting1{
         grid-column: 1;
     }
 }
