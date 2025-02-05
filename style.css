@@ -4,8 +4,14 @@ body{
 }
 
 header{
-    background-image: linear-gradient(to right bottom,rgba(100,233,225,1) 0%, rgba(240,244,245,1) 30%, rgba(100,233,225,1) 52%, rgba(240,244,245,1) 68%, rgba(34,210,231,1) 96%);
+    /* background-image: linear-gradient(to right bottom,rgba(100,233,225,1) 0%, rgba(240,244,245,1) 30%, rgba(100,233,225,1) 52%, rgba(240,244,245,1) 68%, rgba(34,210,231,1) 96%); */
+    background-image: linear-gradient(to top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    height: 40%;
+    -webkit-mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+    mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+    
 }
+    
 
 img{
     width: 90%;
@@ -16,7 +22,8 @@ img{
 h1{
     font-size: 3.5rem;
     text-align: center;
-    text-shadow: 30px 20px #558ABB;
+    padding-top: 30%;
+    /* text-shadow: 30px 20px #558ABB; */
 }
 
 .flip-card1, .flip-card{
@@ -96,8 +103,13 @@ section, aside{
         margin-right: 5rem;
     }
 
+    header{
+        height: 100%;
+    }
+
     h1{
         font-size: 5rem;
+        padding-top: 20%;
     }
 
     h2{
