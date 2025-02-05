@@ -25,6 +25,23 @@ h1{
     padding-top: 30%;
     /* text-shadow: 30px 20px #558ABB; */
 }
+.link{
+    text-align: center;
+}
+
+/* coding from Google https://fonts.google.com/icons?selected=Material+Symbols+Outlined:arrow_outward:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368 */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+a{
+    color: black;
+}
 
 .flip-card1, .flip-card{
     width: 350px;
