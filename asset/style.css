@@ -1,0 +1,177 @@
+body{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+header{
+    padding-bottom: 20%;
+    background: linear-gradient(0deg, rgba(253,225,239,1) 0%, rgba(245,185,237,1) 19%, rgba(254,173,216,1) 37%, rgba(191,119,218,1) 59%, rgba(105,118,248,1) 80%, rgba(70,82,218,1) 100%);
+  
+    /* -webkit-mask-image: url("https://assets.iceable.com/img/noise-transparent.png");
+    mask-image: url("https://assets.iceable.com/img/noise-transparent.png"); */
+    
+    -webkit-mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+    mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+    /* -webkit-mask-image: url('images/black-paper.png');
+    mask-image: url('images/black-paper.png');
+     */
+}
+    
+
+img{
+    width: 90%;
+    padding: 1rem;
+    object-fit: contain;
+}
+
+
+#channel-title{
+    font-size: 3.5rem;
+    text-align: center;
+    padding-top: 30%;
+    font-family: "Libre Franklin", serif;
+    font-style: Medium 500;
+    -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
+    
+    /* text-shadow: 30px 20px #558ABB; */
+}
+
+
+/* .channel-title1{
+    -webkit-box-reflect: below;
+    transform: rotateX(150deg);
+} */
+#link{
+    text-align: center;
+    padding-top: 20%;
+}
+
+/* Icon from Google https://fonts.google.com/icons?selected=Material+Symbols+Outlined:arrow_outward:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368 */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+a{
+    color: black;
+}
+
+#photo-channel{
+    /* height: 25px;
+    width: 20px; */
+    background: repeat-x 100% 0 / 50% 100% radial-gradient(circle at 50% 0, transparent 25%, #7f5fff 65%);
+}
+
+
+.flip-card {
+  width: 100%; /* Adjust as needed */
+  height: 100%; /* Adjust as needed */
+  perspective: 1000px;
+  margin-top: 50px; /* Space between cards */
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .content{
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  img {
+      
+      height: 100%;
+      object-fit: contain; /* Adjust image fitting */
+  }
+}
+
+.card-back {
+  background-color: #f1f1f1; /* Background color of the back */
+  color: black;
+  transform: rotateY(180deg);
+  padding: 10px; /* Space for text */
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.left{
+    transform: skewY(-50deg);
+    width: 150px;
+    height: 80px;
+    
+}
+
+.right{
+    transform: skewY(50deg);
+    width: 150px;
+    height: 80px;
+    text-align: right;
+}
+
+/* section, aside{
+    margin-top: 1rem;
+} */
+
+/* .photo2, .painting1{
+    object-fit: contain;
+    object-position: top center;
+} */
+
+@media (min-width:1440px) {
+
+    body{
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+
+    header{
+        height: 100%;
+    }
+
+    h1{
+        font-size: 5rem;
+        padding-top: 20%;
+    }
+
+    h2{
+        font-size: 4rem;
+    }
+    img{
+        padding: 1.6rem;
+        /* width: 80%; */
+    }
+
+    /* section, aside{
+        margin-top: 2rem;
+    } */
+
+    .photo{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .photo-back h3, .photo-back h4{
+        padding: 5rem;
+    }
+    
+   
+}
