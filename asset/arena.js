@@ -23,7 +23,7 @@ let placeChannelInfo = (data) => {
 	// Target some elements in your HTML:
 	let channelTitle = document.querySelector('#channel-title')
 	let channelDescription = document.querySelector('#channel-description')
-	let channelCount = document.querySelector('#channel-count')
+	// let channelCount = document.querySelector('#channel-count')
 	let channelLink = document.querySelector('#channel-link')
 
 	// Then set their content/attributes to our data:
@@ -121,9 +121,10 @@ let renderBlock = (block) => {
 			let pdfItem = `
 				<li>
 				
-				<p><a href="${ block.image.url }">See the original ↗</a></p>
-					<p><em>Article</em></p>
-					<object controls src="${ block.attachment.url }"></object>
+				<p><em>Article</em></p>
+                <object data="${block.attachment.url}" type="application/pdf" width="600" height="400">
+                <p>Your browser does not support PDFs. <a href="${block.attachment.url}">Download the PDF</a>.</p>
+            </object>
 				</li>
 			`
 			channelPdf.insertAdjacentHTML('beforeend', pdfItem)
@@ -153,7 +154,7 @@ let renderBlock = (block) => {
 			// …still up to you, but here’s an example `iframe` element:
 			let linkedVideoItem =
 				`
-				<li>
+				<li>					
 					<p><em>Linked Video</em></p>
 					${ block.embed.html }
 				</li>
