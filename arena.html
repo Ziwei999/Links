@@ -1,45 +1,83 @@
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_outward" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <script defer src="asset/arena.js"></script>
-         <!-- <link href="asset/rest.css" rel="stylesheet"> -->
-        <link href="asset/style.css" rel="stylesheet">
-    </head>
-    <body>
-          
-        <section id="photo-channel">
-            <li class="photo">
-                <a href="#"><h3>Phtograph</h3></a>
-                <p>Mirror in Photograph</p>
-            </li>
-        </section>
-        <section id="video-channel">
-            <li class="video">
-                <a href="#"><h3>Video</h3></a>
-                <p>Mirror in Video</p>
-            </li>
-        </section>
-        <section id="music-channel">
-            <li class="music">
-                <a href="#"><h3>Music</h3></a>
-                <p>Mirror in Music</p>
-            </li>
-        </section>
-        <section id="pdf-channel">
-            <li class="pdf">
-                <a href="#"><h3>Article</h3></a>
-                <p>Mirror in Article</p>
-            </li>
-        </section>
-        <section id="channel-blocks">
-            <li class="block">
-                <a href="#"><h3>Links</h3></a>
-                <p>Mirror in Links</p>
-            </li>
-        </section>
-    </body>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_outward" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>CodePen - Dither / Dissolve CSS Gradients</title>
+  <link rel="stylesheet" href="asset/main.css">
+  <!-- <script defer src="asset/arena.js"></script> -->
+
+</head>
+<body>
+  <header>
+    <!-- <div class="square">
+      <h1 id="channel-title">Into Mirrors</h1> 
+    </div>
+     -->
+    <h1 id="channel-title">Into Mirrors</h1> 
+    
+    
+        <p><a id="channel-link">Visit Arena Site ↗</a>
+        <!-- <a href="https://www.are.na/bee-altangerel/into-the-mirror" target="_blank">Visit Arena Site -->
+            <!-- <span class="material-symbols-outlined">arrow_outward</span> -->
+        </p>
+    <section id="channel-description"></section>
+    <section>
+      <blockquote>"Mirror, mirror on the wall, who's the fairest of them all."</blockquote>
+    </section>
+  </header>
+<!-- partial:index.partial.html -->
+   <div class="container">
+    <div class="circle item--sphere photo--section">
+      <a href="photo.html" class="photo-link"></a>
+    </div>
+    <div class="circle item--sphere video-section">
+      <a href="#" class="video-link"></a>
+    </div>
+    <div class="circle item--sphere music-section">
+      <a href="#" class="music-link"></a>
+    </div>
+    <div class="circle item--sphere article-section">
+      <a href="article.html" class="article-link"></a>
+    </div>
+   </div>
+<!-- partial -->
+  
+</body>
+<script>
+    let markdownIt = document.createElement('script');
+    markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js';
+    document.head.appendChild(markdownIt);
+
+    let channelSlug = 'into-the-mirror';
+
+    let placeChannelInfo = (data) => {
+    let channelDescription = document.querySelector('#channel-description');
+    let channelLink = document.querySelector('#channel-link');
+    channelDescription.innerHTML = window.markdownit().render(data.metadata.description);
+    channelLink.href = `https://www.are.na/channel/${channelSlug}`;
+    };
+
+    fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
+    .then((response) => response.json()) // Return it as JSON data
+	.then((data) => { // Do stuff with the data
+		console.log(data) // Always good to check your response!
+		placeChannelInfo(data) // Pass the data to the first function
+
+		// Loop through the `contents` array (list), backwards. Are.na returns them in reverse!
+		data.contents.reverse().forEach((block) => {
+			// console.log(block) // The data for a single block
+			renderBlock(block) // Pass the single block data to the render function
+		})
+
+		// Also display the owner and collaborators:
+		let channelUsers = document.querySelector('#channel-users') // Show them together
+		data.collaborators.forEach((collaborator) => renderUser(collaborator, channelUsers))
+		renderUser(data.user, channelUsers)
+	})
+</script>
 </html>
