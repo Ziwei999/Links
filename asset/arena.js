@@ -42,6 +42,8 @@ let renderBlock = (block) => {
 	let channelVideo= document.querySelector('#video-channel')
 	let channelMusic= document.querySelector('#music-channel')
 	let channelPdf= document.querySelector('#pdf-channel')
+	let channelAudio= document.querySelector('#audio-channel')
+	
 
 	// Links!
 	if (block.class == 'Link') {
@@ -106,8 +108,10 @@ let renderBlock = (block) => {
 			let videoItem =
 				`
 				<li>
+				
 					<p><em>Video</em></p>
 					<p controls src="${ block.attachment.url }"></p>
+					<img src="${block.image.original.url}" alt="${block.title}">
 				</li>
 				`
 			channelBlocks.insertAdjacentHTML('beforeend', videoItem)
@@ -125,6 +129,7 @@ let renderBlock = (block) => {
                 <object data="${block.attachment.url}" type="application/pdf" width="600" height="400">
                 <p>Your browser does not support PDFs. <a href="${block.attachment.url}">Download the PDF</a>.</p>
             </object>
+			<img src="${block.image.original.url}" alt="${block.title}">
 				</li>
 			`
 			channelPdf.insertAdjacentHTML('beforeend', pdfItem)
@@ -138,6 +143,7 @@ let renderBlock = (block) => {
 				<li>
 					<p><em>Audio</em></p>
 					<audio controls src="${ block.attachment.url }"></audio>
+					
 				</li>
 				`
 				channelMusic.insertAdjacentHTML('beforeend', audioItem)
@@ -166,6 +172,13 @@ let renderBlock = (block) => {
 		// Linked audio!
 		else if (embed.includes('rich')) {
 			// …up to you!
+			let LinkedAudioItem = 
+			`
+			<li>
+			<img src="${block.image.thumb.url}"</img>
+			</li>
+			`
+			channelAudio.insertAdjacentHTML('beforeend', LinkedAudioItem)
 		}
 	}
 }

@@ -6,7 +6,7 @@
     box-sizing: border-box;
     /* max-width: 1024px; */
     /* margin-top: 20px; */
-    padding: 20px;
+    /* padding: 20px; */
     text-align: center;
     height: 1fr;
     /* display: flex;
@@ -192,33 +192,34 @@
     left: 0;
     height: 100%;
     width: 400%;
-    -webkit-mask: url("maskimage.png"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
-    mask: url("maskimage.png"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
+    -webkit-mask: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
+    mask: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
   }
   .circle:hover {
     transform: scale(1.05);
   }
-  .circle:hover.circle::before, .circle:hover.item::after {
+  /* .circle:hover.circle::before, .circle:hover.item::after {
     -webkit-animation: spin-round 3s linear infinite;
             animation: spin-round 3s linear infinite;
   }
   .circle:active {
     -webkit-animation: hue-rotate 3s infinite;
             animation: hue-rotate 3s infinite;
-  }
+  } */
   .item--sphere {
     border-radius: 50%;
   }
   
   
   .photo--section {
-    background-image: linear-gradient(to right bottom, #4652da, #7470e2, #988fea, #b8b0f1, #d7d1f7, #d7d1f7, #d7d1f7, #d7d1f7, #b8b0f1, #988fea, #7470e2, #4652da);
+    background-image: linear-gradient(to right bottom, #bf77da, #f0f4f5,#bf77da, #f0f4f5, #bf77da, #f0f4f5);
   }
   .photo--section::before {
     background: repeat-y 100% 0/100% 100% linear-gradient(to left bottom, transparent 30%, #7f5fff 85%);
   }
   .video-section {
-    background-image: linear-gradient(to right bottom, #fa709a, #f88fbe, #f3acdb, #efc8ee, #f0e1fa, #f0e1fa, #f0e1fa, #f0e1fa, #efc8ee, #f3acdb, #f88fbe, #fa709a);
+    /* background-image: linear-gradient(to right bottom, #fa709a, #f88fbe, #f3acdb, #efc8ee, #f0e1fa, #f0e1fa, #f0e1fa, #f0e1fa, #efc8ee, #f3acdb, #f88fbe, #fa709a); */
+    background-image: linear-gradient(to right bottom, #bf77da, #f0f4f5, #bf77da, #f0f4f5, #bf77da, #f0f4f5);
   }
   .video-section::before {
     background: repeat-y 100% 0/100% 100% linear-gradient(to left bottom, transparent 30%, #fa709a 85%);
@@ -342,3 +343,54 @@
       filter: hue-rotate(0deg);
     }
   }
+
+  /* svg style */
+
+  #Layer_1{
+    /* position: relative; */
+    /* display: inline-block; */
+    margin: 50px;
+    width: 300px;
+    /* height: 400px; */
+    box-shadow: -5px 18px 25px -15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+    /* border-radius: 50%; */
+    /* border: 2px solid black; */
+}
+
+#Layer_1::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    /* height: 100%; */
+    /* width: 400%; */
+    -webkit-mask: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
+    mask: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/"), radial-gradient(circle at 50% 0, transparent 5%, #000 80%) 0 0/50% 100%;
+}
+
+#Layer_1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.cls-2 {
+    stroke: #000;
+    stroke-miterlimit: 10;
+    stroke-width: 5px;
+    fill: linear-gradient(to right bottom, #bf77da, #f0f4f5,#bf77da, #f0f4f5, #bf77da, #f0f4f5);
+    transition: fill 0.2s ease;
+}
+
+
+
+#Layer_1:hover .cls-2 {
+    fill: url(#grad2);
+}
+
+/* object{
+  width: 50%;
+} */
