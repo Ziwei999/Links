@@ -123,14 +123,14 @@ let renderMusic = (data) =>{
                 let LinkedAudioItem = 
                 `
                 <li class="flip-card">
-                <div class="content">
-                             <div class="card-front">
-                <img src="${block.image.thumb.url}"</img>
-                </div>
-                <div class="card-back">
-                              <p>${block.description_html}</p>
-                             </div>
-                </div>
+                    <div class="content">
+                        <div class="card-front">
+                            <img src="${block.image.thumb.url}"</img>
+                        </div>
+                        <div class="card-back">
+                            <p>${block.description_html}</p>
+                        </div>
+                    </div>
                 </li>
                 `
                 channelMusic.insertAdjacentHTML('beforeend', LinkedAudioItem)
@@ -177,17 +177,13 @@ let renderArticles = (data) =>{
             <li  class="flip-card">
                  <div class="content">
                     <div class="card-front">
-                     <p>${block.content_html}</p>
+                       <p>${block.content_html}</p>
                        
                     </div>
                     <div class="card-back">
-                        
-                        <p>${block.description_html}</p>
+                       <p>${block.description_html}</p>
                     </div>
-                </div>     
-                
-                
-                  
+                </div>      
             </li>
             `
             channelBlocks.insertAdjacentHTML('beforeend', textItem)
