@@ -5,6 +5,24 @@ markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-
 document.head.appendChild(markdownIt)
 
 
+let addScrollFlip = (card) => {
+    let lastTouchY;
+
+    card.addEventListener('touchstart', (event) => {
+        lastTouchY = event.touches[0].clientY; // Track starting Y position
+    });
+
+    card.addEventListener('touchmove', (event) => {
+        let currentY = event.touches[0].clientY;
+        if (lastTouchY > currentY + 30) {
+            // Scrolling down: flip to back
+            card.querySelector('.content').style.transform = 'rotateY(180deg)';
+        } else if (lastTouchY < currentY - 30) {
+            // Scrolling up: flip to front
+            card.querySelector('.content').style.transform = 'rotateY(0deg)';
+        }
+    });
+};
 
 // Okay, Are.na stuff!
 let channelSlug = 'into-the-mirror' // The “slug” is just the end of the URL
@@ -56,7 +74,7 @@ let renderPhotos = (data) =>{
     
             channelPhoto.insertAdjacentHTML('beforeend', imageItem)
 
-            addSwipeFlip(channelPhoto.lastChild);
+            addScrollFlip(channelPhoto.lastChild);
         }
     })
    
@@ -249,11 +267,11 @@ let renderArticles = (data) =>{
                         <button class="toggle-button">Show More</button>
                        </p>
                        <div class="modal" style="display:none;">
-                                <div class="modal-content">
-                                    <span class="close-button">&times;</span>
-                                    <div id="modal-text">${block.content_html}</div>
-                                </div>
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                 <div id="modal-text">${block.content_html}</div>
                             </div>
+                        </div>
                     </div>
                 </div>      
             </li>
@@ -304,25 +322,7 @@ let renderBlock = (block) => {
     }
 }
 
-let addSwipeFlip = (card) => {
-    let startX;
 
-    card.addEventListener('touchstart', (event) => {
-        startX = event.touches[0].clientX; // Get the starting touch position
-    });
-
-    card.addEventListener('touchmove', (event) => {
-        // Calculate the swipe direction
-        let endX = event.touches[0].clientX;
-        if (startX > endX + 50) {
-            // Swipe left
-            card.querySelector('.content').style.transform = 'rotateY(180deg)';
-        } else if (startX < endX - 50) {
-            // Swipe right
-            card.querySelector('.content').style.transform = 'rotateY(0deg)';
-        }
-    });
-};
 
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data
