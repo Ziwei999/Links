@@ -38,9 +38,16 @@ let renderPhotos = (data) =>{
                         </div>
                         <div class="card-back">
                             <h3>${block.title}</h3>
-                            <p>${block.description_html}</p>
-                            <a href="${block.image.url}">See the original ↗</a>
-                        </div>
+                            <button class="toggle-button">See Description</button>
+                            <div class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <span class="close-button">&times;</span>
+                                    <div class="photo-content">
+                                        <p>${block.description_html}</p>
+                                    </div>
+                                </div> 
+                            </div> 
+                        </div> 
                     </div>
                 </li>
                 
@@ -50,6 +57,41 @@ let renderPhotos = (data) =>{
             channelPhoto.insertAdjacentHTML('beforeend', imageItem)
         }
     })
+
+    channelPhoto.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            if (event.deltaY > 0) {
+                card.querySelector('.content').style.transform = 'rotateY(180deg)';
+            } else {
+                card.querySelector('.content').style.transform = 'rotateY(0deg)';
+            }
+        });
+    });
+   
+    channelPhoto.addEventListener('click', (event) => {
+        if (event.target.classList.contains('toggle-button')) {
+            let modal = event.target.closest('.card-back').querySelector('.modal');
+            if (modal) {
+                modal.style.display = "block"; // Show the modal
+            }
+        }
+    });
+
+    //This code from ChatGPT
+    channelPhoto.addEventListener('click', (event) => {
+        if (event.target.classList.contains('close-button')) {
+            let modal = event.target.closest('.modal');
+            if (modal) {
+                modal.style.display = "none"; // Close the modal
+            }
+        }
+
+        // Close the modal when clicking outside of the modal content
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none"; // Close the modal if clicking outside
+        }
+    });
 }
 
 let renderVideos = (data) =>{
@@ -69,8 +111,16 @@ let renderVideos = (data) =>{
                                 <img src="${block.image.thumb.url}"</img>
                             </div>
                             <div class="card-back">
-                                <div class="video-content">
-                                    ${block.embed.html}
+                               <h3>${block.title}</h3>
+                               <p>${block.description_html}</p>
+                               <button class="toggle-button">Watch Video</button>
+                                <div class="modal" style="display:none;">
+                                    <div class="modal-content">
+                                        <span class="close-button">&times;</span>
+                                        <div class="video-content">
+                                            ${block.embed.html}
+                                        </div>
+                                    </div>
                                 </div>
                                
                             </div>
@@ -79,11 +129,33 @@ let renderVideos = (data) =>{
                     </li>
                     `
                 channelVideo.insertAdjacentHTML('beforeend', linkedVideoItem)
-                // More on iframe: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
             }
         }
     
     })
+    channelVideo.addEventListener('click', (event) => {
+        if (event.target.classList.contains('toggle-button')) {
+            let modal = event.target.closest('.card-back').querySelector('.modal');
+            if (modal) {
+                modal.style.display = "block"; // Show the modal
+            }
+        }
+    });
+
+    //This code from ChatGPT
+    channelVideo.addEventListener('click', (event) => {
+        if (event.target.classList.contains('close-button')) {
+            let modal = event.target.closest('.modal');
+            if (modal) {
+                modal.style.display = "none"; // Close the modal
+            }
+        }
+
+        // Close the modal when clicking outside of the modal content
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none"; // Close the modal if clicking outside
+        }
+    });
 }
 
 let renderMusic = (data) =>{
@@ -101,10 +173,11 @@ let renderMusic = (data) =>{
                         <div class="content">
                              <div class="card-front">
                                  <p><em>Audio</em></p>
-                                 <audio controls src="${ block.attachment.url }"></audio>
+                                 <p>${block.description_html}</p>
                              </div>
                              <div class="card-back">
-                                 <p>${block.description_html}</p>
+                                
+                                 <audio controls src="${ block.attachment.url }"></audio>
                              </div>
                              
                         </div>         
@@ -113,7 +186,6 @@ let renderMusic = (data) =>{
                     </li>
                     `
                     channelAudio.insertAdjacentHTML('beforeend', audioItem)
-                // More on audio: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
             }
         }
         else if (block.class === 'Media' && block.embed) {
@@ -128,7 +200,7 @@ let renderMusic = (data) =>{
                             <img src="${block.image.thumb.url}"</img>
                         </div>
                         <div class="card-back">
-                            <p>${block.description_html}</p>
+                             ${block.embed.html}
                         </div>
                     </div>
                 </li>
@@ -144,6 +216,7 @@ let renderArticles = (data) =>{
     
     let channelPdf= document.querySelector('#pdf-channel')
     let channelBlocks= document.querySelector('#text-channel')
+    
     data.forEach(block =>{
 
         if (block.class == 'Attachment'){
@@ -158,9 +231,7 @@ let renderArticles = (data) =>{
                                  <img src="${block.image.original.url}" alt="${block.title}">
                              </div>
                              <div class="card-back">
-                                <object data="${block.attachment.url}" type="application/pdf" width="600" height="400">
-                                   <p>Your browser does not support PDFs. <a href="${block.attachment.url}">Download the PDF</a>.</p>
-                                </object>
+                                 <a href="${block.attachment.url}">Download the PDF</a>
                              </div>
                         </div>
                     
@@ -171,24 +242,61 @@ let renderArticles = (data) =>{
             }
         }
         else if (block.class == 'Text') {
+            
             // …up to you!
             console.log(block.content_html)
+            let shortContent = block.content_html.length > 100 ? block.content_html.substring(0, 100) + '...' : block.content_html;
             let textItem = `
             <li  class="flip-card">
                  <div class="content">
                     <div class="card-front">
-                       <p>${block.content_html}</p>
+                        <p>${block.description_html}</p>
                        
                     </div>
                     <div class="card-back">
-                       <p>${block.description_html}</p>
+                       <p class="content-text">${shortContent}
+                        <button class="toggle-button">Show More</button>
+                       </p>
+                       <div class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <span class="close-button">&times;</span>
+                                    <div id="modal-text">${block.content_html}</div>
+                                </div>
+                            </div>
                     </div>
                 </div>      
             </li>
             `
             channelBlocks.insertAdjacentHTML('beforeend', textItem)
+            
         }
     })
+
+    //This code from ChatGPT
+    channelBlocks.addEventListener('click', (event) => {
+        if (event.target.classList.contains('toggle-button')) {
+            let modal = event.target.closest('.card-back').querySelector('.modal');
+            if (modal) {
+                modal.style.display = "block"; // Show the modal
+            }
+        }
+    });
+
+   //This code from ChatGPT
+    channelBlocks.addEventListener('click', (event) => {
+        if (event.target.classList.contains('close-button')) {
+            let modal = event.target.closest('.modal');
+            if (modal) {
+                modal.style.display = "none"; // Close the modal
+            }
+        }
+
+        // Close the modal when clicking outside of the modal content
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none"; // Close the modal if clicking outside
+        }
+    });
+   
 }
 
 let renderBlock = (block) => {
@@ -204,6 +312,20 @@ let renderBlock = (block) => {
         renderArticles([block]);
     }
 }
+
+document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('wheel', (event) => {
+        // Prevent default scrolling behavior
+        event.preventDefault();
+        
+        // Check the scroll direction
+        if (event.deltaY > 0) {
+            card.querySelector('.content').style.transform = 'rotateY(180deg)'; // Flip to back
+        } else {
+            card.querySelector('.content').style.transform = 'rotateY(0deg)'; // Flip to front
+        }
+    });
+});
 
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data

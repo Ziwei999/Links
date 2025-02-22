@@ -1,13 +1,10 @@
-body{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    
-}
+:root{
+    --font-famay: "Libre Franklin", serif;
+  }
 
 header{
     padding-bottom: 20%;
     background: linear-gradient(0deg, rgba(191,119,218,1) 59%, rgba(105,118,248,1) 80%, rgba(70,82,218,1) 100%);
-    
     -webkit-mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
     mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
     /* -webkit-mask-image: url('images/black-paper.png');
@@ -22,10 +19,6 @@ img{
     
 }
 
-.flip-card img{
-    object-fit: cover;
-}
-
 p{
     font-size: 1rem;
 }
@@ -38,49 +31,45 @@ article{
     background: linear-gradient(0deg, #fde1ef 0%, #feadd8 32%, #f5b9ed 68%, #bf77da 100%);
     -webkit-mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
     mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+    margin: 0;
+    padding-top: 20px;
+    
 }
 
 
 #channel-title{
-    font-size: 3.5rem;
-    text-align: center;
     padding-top: 30%;
-    font-family: "Libre Franklin", serif;
+    font-size: 4rem;
+    text-align: center;
+    font-family: var(--font-famay);
     font-style: Medium 500;
     -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
-    
-    /* text-shadow: 30px 20px #558ABB; */
 }
 
+#subtitle{
+    font-family: var(--font-famay);
+    margin-top: 10rem;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+}
 
-/* .channel-title1{
-    -webkit-box-reflect: below;
-    transform: rotateX(150deg);
-} */
 #link{
     text-align: center;
     padding-top: 20%;
 }
 
-/* Icon from Google https://fonts.google.com/icons?selected=Material+Symbols+Outlined:arrow_outward:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368 */
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
-
-
-a{
-    color: black;
-}
 
 
 
 #photo-channel{
     background: repeat-x 100% 0 / 50% 100% radial-gradient(circle at 50% 0, transparent 25%, #7f5fff 65%);
     
+}
+
+#video-channel{
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: space-between; 
 }
 
 li{
@@ -91,22 +80,31 @@ li{
 
 
 .flip-card {
-  width: 100%; 
-  /* height: 100%;   */
+  max-width: 100%; 
+  max-height: 100%;  
   perspective: 1000px;
   margin-top: 60px; 
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  /* border: 2px solid black; */
+  margin: 2rem;
+  perspective: 1000px;
 
 }
+
+
+.flip-card img{
+    object-fit: cover;
+}
+
 
 .content {
   position: relative;
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 1s;
+  transition: transform .6s;
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   aspect-ratio: 1 / 1;
@@ -121,49 +119,149 @@ li{
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  background-color: rgba(255, 255, 255, 0.3)
 }
 
-.card-front {
-  img {
-      
-      height: 100%;
-      /* object-fit: cover;  */
-  }
+.card-front img{
+    object-fit: cover;
 }
 
 .card-back {
-  background-color: #f1f1f1; /* Background color of the back */
+  /* background-color: #f1f1f1;  */
   color: black;
   transform: rotateY(180deg);
-  padding: 10px; /* Space for text */
+  padding: 10px; 
   box-sizing: border-box;
   font-size: 20px;
 }
 
-.left{
-    transform: skewY(-50deg);
-    width: 150px;
-    height: 80px;
+.card-back p{
+    /* max-height: 200px;  */
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+
+.flip-card.scroll-flip .content {
+    transform: rotateY(180deg);
+    transition: transform 0.6s ease-in-out; /* Adjust timing as needed */
+}
+
+.flipped .content {
+    transform: rotateY(180deg);
+}
+
+.video-content{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    /* background-color: rgb(0,0,0); */
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+  }
+  
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-button:hover,
+  .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .video-content{
+    position: relative;
+    padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+  }
+  
+  .video-content iframe,
+  .video-content object,
+  .video-content embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
+  @media (min-width:600px) {
+    #channel-title{
+      font-size: 5.5rem;
+      
+    }
+
+  }
+
+  @media (min-width: 768px){
+    #photo-channel, #pdf-channel, #text-channel, #music-channel, #audio-channel, #video-channel{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        
+    }
+
+    #channel-title{
+        font-size: 7rem;
+        
+      }
+  }
+
+  @media (min-width:1024px) {
+    #channel-title{
+      font-size: 10rem;
+      
+    }
+
+  }
+
+  /* @media (min-width:768px) {
+    #channel-title{
+      font-size: 6rem;
+    }
+  
     
-}
+    
+  } */
 
-.right{
-    transform: skewY(50deg);
-    width: 150px;
-    height: 80px;
-    text-align: right;
-}
-
+  
 
 @media (min-width:1440px) {
 
     body{
-        margin-left: 5rem;
-        margin-right: 5rem;
+        
     }
 
     header{
-        height: 100%;
+        /* height: 100%; */
+        padding-bottom: 20%;
+    }
+
+    article{
+        padding-right: 2rem;
     }
 
     h1{
@@ -173,12 +271,22 @@ li{
 
     h2{
         font-size: 4rem;
+        
+    }
+    #subtitle{
+        font-size: 3rem;
+        margin-top: 30%;
     }
     img{
         padding: 1.6rem;
         object-fit: cover;
         /* width: 80%; */
     }
+
+    #channel-title{
+        font-size: 15rem;
+        padding-top: 15%;
+      }
 
     .flip-card img{
         object-fit: cover;
@@ -190,6 +298,9 @@ li{
         grid-template-columns: repeat(2,minmax(0,1fr)); */
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        /* padding-left: 2rem; */
+        margin-right: 2rem;
         
     }
     
