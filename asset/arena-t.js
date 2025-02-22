@@ -55,19 +55,10 @@ let renderPhotos = (data) =>{
             `
     
             channelPhoto.insertAdjacentHTML('beforeend', imageItem)
+
+            addSwipeFlip(channelPhoto.lastChild);
         }
     })
-
-    channelPhoto.querySelectorAll('.flip-card').forEach(card => {
-        card.addEventListener('wheel', (event) => {
-            event.preventDefault();
-            if (event.deltaY > 0) {
-                card.querySelector('.content').style.transform = 'rotateY(180deg)';
-            } else {
-                card.querySelector('.content').style.transform = 'rotateY(0deg)';
-            }
-        });
-    });
    
     channelPhoto.addEventListener('click', (event) => {
         if (event.target.classList.contains('toggle-button')) {
@@ -313,19 +304,25 @@ let renderBlock = (block) => {
     }
 }
 
-document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('wheel', (event) => {
-        // Prevent default scrolling behavior
-        event.preventDefault();
-        
-        // Check the scroll direction
-        if (event.deltaY > 0) {
-            card.querySelector('.content').style.transform = 'rotateY(180deg)'; // Flip to back
-        } else {
-            card.querySelector('.content').style.transform = 'rotateY(0deg)'; // Flip to front
+let addSwipeFlip = (card) => {
+    let startX;
+
+    card.addEventListener('touchstart', (event) => {
+        startX = event.touches[0].clientX; // Get the starting touch position
+    });
+
+    card.addEventListener('touchmove', (event) => {
+        // Calculate the swipe direction
+        let endX = event.touches[0].clientX;
+        if (startX > endX + 50) {
+            // Swipe left
+            card.querySelector('.content').style.transform = 'rotateY(180deg)';
+        } else if (startX < endX - 50) {
+            // Swipe right
+            card.querySelector('.content').style.transform = 'rotateY(0deg)';
         }
     });
-});
+};
 
 fetch(`https://api.are.na/v2/channels/${channelSlug}?per=100`, { cache: 'no-store' })
 	.then((response) => response.json()) // Return it as JSON data
