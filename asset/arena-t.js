@@ -5,24 +5,28 @@ markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-
 document.head.appendChild(markdownIt)
 
 
-let addScrollFlip = (card) => {
-    let lastTouchY;
+let flipped = false;
+let lastScrollY = 0;
 
-    card.addEventListener('touchstart', (event) => {
-        lastTouchY = event.touches[0].clientY; // Track starting Y position
-    });
+window.addEventListener('scroll', () => {
+  const cardContent = document.querySelector('.flip-card .content');
+  const currentScrollY = window.scrollY;
 
-    card.addEventListener('touchmove', (event) => {
-        let currentY = event.touches[0].clientY;
-        if (lastTouchY > currentY + 30) {
-            // Scrolling down: flip to back
-            card.querySelector('.content').style.transform = 'rotateY(180deg)';
-        } else if (lastTouchY < currentY - 30) {
-            // Scrolling up: flip to front
-            card.querySelector('.content').style.transform = 'rotateY(0deg)';
-        }
-    });
-};
+  // Trigger flip only if the user scrolls down
+  if (currentScrollY > lastScrollY && !flipped) {
+    if (cardContent) {
+      cardContent.style.transform = 'rotateY(180deg)';
+      flipped = true;
+    }
+  } else if (currentScrollY < lastScrollY && flipped) {
+    if (cardContent) {
+      cardContent.style.transform = 'rotateY(0deg)';
+      flipped = false;
+    }
+  }
+
+  lastScrollY = currentScrollY; // Update the last scroll position
+});
 
 // Okay, Are.na stuff!
 let channelSlug = 'into-the-mirror' // The “slug” is just the end of the URL
@@ -73,8 +77,6 @@ let renderPhotos = (data) =>{
             `
     
             channelPhoto.insertAdjacentHTML('beforeend', imageItem)
-
-            addScrollFlip(channelPhoto.lastChild);
         }
     })
    
