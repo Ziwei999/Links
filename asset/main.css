@@ -1,5 +1,10 @@
   :root{
     --font-famay: "Libre Franklin", serif;
+    --font-color:black;
+    --primary-color:white;
+    --font-size: 1.3rem;
+    --primary-size: 50%;
+    --max-size: 100%;
   }
   
   .container {
@@ -19,8 +24,8 @@
     left: 0;
     z-index: -1;
     display: block;
-    width: 100%;
-    height: 100%;
+    width:var(--max-size);
+    height: var(--max-size)
   }
   
   .container::before {
@@ -46,17 +51,55 @@
   p{
     padding-top:5rem;
     font-size: 1.5rem;
-    font-family: var(--font-famay);text-align: center;
+    font-family: var(--font-famay);
+    text-align: center;
   }
 
+  .titleinm{
+    fill:  var( --font-color);
+    font-family: var(--font-famay);
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+    
   #Layer_2{
   
-    width: 100%;
+    width: var(--max-size);
+    height: var(--primary-size);
     display: block;
     margin: 0; 
-    padding-top: 3rem;
-    padding-top: 10rem;
+    /* padding-top: 3rem; */
+    
+    /* padding-top: 10rem; */
   }
+
+  .st1, .st2, .st3, .st4, .st5{
+    animation: move 20s linear infinite;
+    animation-delay: -2s;
+    
+  }
+  @-moz-keyframes move {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(-100%); }
+  }
+    
+    
+  @-webkit-keyframes move {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(-100%); }
+  }
+    
+  @keyframes move {
+    from {
+      transform: translateX(20%);
+    }
+    to {
+       transform: translateX(-160%);
+    }
+  
+  }
+  
 
 
   .link{
@@ -65,18 +108,18 @@
 
   #channel-link{
     /* margin-top: 8rem; */
-    font-size: 1.3rem;
+    font-size: var(--font-size);
   }
 
   #channel-description{
     padding: 2rem;
-    font-size: 1.3rem;
+    font-size: var(--font-size);
   }
   
   .content {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: var(--max-size);
+    height: var(--max-size);
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
@@ -94,7 +137,7 @@
   
   
   a{
-      color: black;
+      color: var(--font-color);
   }
   
   span {
@@ -107,7 +150,7 @@
     margin-top: 10rem;
     font-family: var(--font-famay);
     font-style: italic;
-    color: white;
+    color: var(--primary-color);
   }
 
   #scroll {
@@ -117,7 +160,7 @@
 
 
 #Layer_1{
-  border-radius: 50%;
+  border-radius: var(--primary-size);
   margin: 50px;
   background-color: rgba(255, 255, 255, 0.15);
 }
@@ -163,7 +206,7 @@ svg{
   width: 100%;
   display: block;
   margin: 0; 
-  height: 50%;
+  height: var(--primary-size);
 }
 
 .reflect{
@@ -213,7 +256,7 @@ svg{
   }
 
   #channel-link{
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .link{
@@ -222,13 +265,18 @@ svg{
 
   #channel-description p{
     font-size: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
   }
   .container{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    
   }
   blockquote{
     font-size: 5rem;
+    
   }
 }
 
@@ -245,6 +293,7 @@ svg{
 
   #channel-title{
     font-size: 15rem;
+    margin: 0;
   }
 
   .icon {
@@ -265,7 +314,7 @@ svg{
 
   #scroll {
     text-align: center;
-    transform: translate(-50%, -600%);
+    transform: translate(-50%, -200%);
     display: block;
   }
 
