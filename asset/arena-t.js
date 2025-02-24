@@ -5,27 +5,37 @@ markdownIt.src = 'https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-
 document.head.appendChild(markdownIt)
 
 
-let flipped = false;
+//This code from ChatGPT
 let lastScrollY = 0;
 
-window.addEventListener('scroll', () => {
-  const cardContent = document.querySelector('.flip-card .content');
-  const currentScrollY = window.scrollY;
+document.addEventListener('scroll', function() {
+    // Only execute if the viewport width is less than or equal to 768px (common mobile breakpoint)
+    if (window.innerWidth <= 768) {
+        const currentScrollY = window.scrollY;
+        const cards = document.querySelectorAll('.flip-card');
 
-  // Trigger flip only if the user scrolls down
-  if (currentScrollY > lastScrollY && !flipped) {
-    if (cardContent) {
-      cardContent.style.transform = 'rotateY(180deg)';
-      flipped = true;
-    }
-  } else if (currentScrollY < lastScrollY && flipped) {
-    if (cardContent) {
-      cardContent.style.transform = 'rotateY(0deg)';
-      flipped = false;
-    }
-  }
+        // Check if scrolling down
+        if (currentScrollY > lastScrollY) {
+            cards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
 
-  lastScrollY = currentScrollY; // Update the last scroll position
+                // Check if the card is in the viewport
+                if (cardRect.top < window.innerHeight && cardRect.bottom > 0) {
+                    card.classList.add('flipped');
+                } else {
+                    card.classList.remove('flipped');
+                }
+            });
+        } else {
+            // Optionally handle scrolling up if needed
+            cards.forEach(card => {
+                card.classList.remove('flipped'); // Flip back if you want
+            });
+        }
+
+        // Update lastScrollY
+        lastScrollY = currentScrollY;
+    }
 });
 
 // Okay, Are.na stuff!
@@ -60,7 +70,7 @@ let renderPhotos = (data) =>{
                         </div>
                         <div class="card-back">
                             <h3>${block.title}</h3>
-                            <button class="toggle-button">See Description</button>
+                            <button class="toggle-button">Description</button>
                             <div class="modal" style="display:none;">
                                 <div class="modal-content">
                                     <span class="close-button">&times;</span>
@@ -174,7 +184,9 @@ let renderMusic = (data) =>{
     let channelMusic= document.querySelector('#music-channel')
     let channelAudio= document.querySelector('#audio-channel')
     data.forEach(block =>{
+        console.log('Block Description HTML:', block.description_html);
         if (block.class == 'Attachment'){
+            
             let attachment = block.attachment.content_type
             if (attachment.includes('audio')) {
                 // …still up to you, but here’s an `audio` element:
@@ -183,11 +195,12 @@ let renderMusic = (data) =>{
                     <li class="flip-card">
                         <div class="content">
                              <div class="card-front">
-                                 <p><em>Audio</em></p>
-                                 <p>${block.description_html}</p>
+                                 <h3>${block.title}</h3>
+                                 <div>${block.description_html ?block.description_html:'<p>Description unavailable!</p>'}</div>
+                                 
                              </div>
                              <div class="card-back">
-                                
+                                 <h3>${block.title}</h3>
                                  <audio controls src="${ block.attachment.url }"></audio>
                              </div>
                              
@@ -211,7 +224,7 @@ let renderMusic = (data) =>{
                             <img src="${block.image.thumb.url}"</img>
                         </div>
                         <div class="card-back">
-                             ${block.embed.html}
+                            <div class="spotify"> ${block.embed.html}</div>
                         </div>
                     </div>
                 </li>
@@ -227,6 +240,7 @@ let renderArticles = (data) =>{
     
     let channelPdf= document.querySelector('#pdf-channel')
     let channelBlocks= document.querySelector('#text-channel')
+    let channelArticle= document.querySelector('#article-channel')
     
     data.forEach(block =>{
 
@@ -261,7 +275,7 @@ let renderArticles = (data) =>{
             <li  class="flip-card">
                  <div class="content">
                     <div class="card-front">
-                        <p>${block.description_html}</p>
+                        <div>${block.description_html ?block.description_html:'<p>Description unavailable!</p>'}</div>
                        
                     </div>
                     <div class="card-back">
@@ -281,6 +295,35 @@ let renderArticles = (data) =>{
             channelBlocks.insertAdjacentHTML('beforeend', textItem)
             
         }
+        else if (block.class == 'Link') {
+            
+            // …up to you!
+            console.log(block.content_html)
+            let shortContent = block.content_html.length > 100 ? block.content_html.substring(0, 100) + '...' : block.content_html;
+            let linkItem = `
+            <li  class="flip-card">
+                 <div class="content">
+                    <div class="card-front">
+                         <img src="${block.image.original.url}" alt="${block.title}">
+                       
+                    </div>
+                    <div class="card-back">
+                       <p class="content-text">${shortContent}
+                        <button class="toggle-button"><a href="${ block.source.url }">Show More</a></button>
+                       </p>
+                       <div class="modal" style="display:none;">
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                 <div id="modal-text">${ block.source.url }</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </li>
+            `
+            channelArticle.insertAdjacentHTML('beforeend', linkItem)
+            
+        }
     })
 
     //This code from ChatGPT
@@ -293,7 +336,7 @@ let renderArticles = (data) =>{
         }
     });
 
-   //This code from ChatGPT
+   
     channelBlocks.addEventListener('click', (event) => {
         if (event.target.classList.contains('close-button')) {
             let modal = event.target.closest('.modal');

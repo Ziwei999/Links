@@ -8,6 +8,8 @@
     box-sizing: border-box;
     padding: 20px;
     text-align: center;
+    /* padding-bottom: 10%; */
+    /* padding: 4rem; */
   }
   
   .container::before, .container::after {
@@ -54,9 +56,8 @@
     margin: 0; 
     padding-top: 3rem;
     padding-top: 10rem;
-    
-  
   }
+
 
   .link{
     margin-top: 5rem;
@@ -158,6 +159,21 @@ svg{
     fill: none;
 }
 
+#Layer_3{
+  width: 100%;
+  display: block;
+  margin: 0; 
+  height: 50%;
+}
+
+.reflect{
+  background-image: linear-gradient(#aa263f, #dd62a4, #f3a17a);
+  place-items: center;
+  -webkit-mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+  mask-image: url("https://ucarecdn.com/9514f9b1-3bf9-4b7c-b31d-9fb8cd6af8bf/");
+  
+}
+
 @media (min-width:600px) {
   #channel-title{
     font-size: 5.5rem;
@@ -184,6 +200,12 @@ svg{
   
 }
 
+@media (min-width: 1000px) {
+  .container{
+    padding: 7rem;
+  }
+}
+
 @media (min-width:1024px) {
   #channel-title{
     font-size: 10rem;
@@ -200,6 +222,10 @@ svg{
 
   #channel-description p{
     font-size: 3rem;
+  }
+  .container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   blockquote{
     font-size: 5rem;
@@ -241,6 +267,11 @@ svg{
     text-align: center;
     transform: translate(-50%, -600%);
     display: block;
+  }
+
+  blockquote{
+    font-size: 5rem;
+    margin-top: 20rem;
   }
 
  
