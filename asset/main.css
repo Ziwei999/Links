@@ -275,7 +275,9 @@ svg{
     
   }
   blockquote{
-    font-size: 5rem;
+    font-size: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     
   }
 }
