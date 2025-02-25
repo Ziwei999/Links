@@ -280,6 +280,7 @@ svg{
     padding-right: 2rem;
     
   }
+  
 }
 
 
@@ -298,6 +299,11 @@ svg{
     margin: 0;
   }
 
+  blockquote{
+    font-size: 5rem;
+    margin-top: 20rem;
+  }
+
   .icon {
     background-color:white;
     width: 4em;
@@ -306,6 +312,7 @@ svg{
     padding: 0.25em 0.35rem;
     border-radius: calc(1px / 0);
     border: 1px dashed;
+    font-size: 2rem;
     
   }
 
@@ -318,11 +325,6 @@ svg{
     text-align: center;
     transform: translate(-50%, -200%);
     display: block;
-  }
-
-  blockquote{
-    font-size: 5rem;
-    margin-top: 20rem;
   }
 
  
