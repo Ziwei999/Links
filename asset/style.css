@@ -235,12 +235,24 @@ li{
   .toggle-button:hover {
     background-position: 0; 
 }
+
+.text-t p{
+  font-size: 1.3rem;
+  font-family: var(--font-famay);
+  padding: 1rem;
+  font-weight: 500;
+}
   
 
   @media (min-width:600px) {
     #channel-title{
       font-size: 5.5rem;
       
+    }
+    .text-t p{
+      font-size: 1.3rem;
+      font-family: var(--font-famay);
+      padding: 2rem;
     }
 
     #subtitle{
@@ -253,7 +265,7 @@ li{
   }
 
   @media (min-width: 768px){
-    #photo-channel, #pdf-channel, #text-channel, #music-channel, #audio-channel, #video-channel{
+    #photo-channel, #pdf-channel, #text-channel, #music-channel, #audio-channel, #video-channel, #article-channel{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
@@ -263,6 +275,12 @@ li{
     #channel-title{
         font-size: 7rem;
         
+      }
+
+      .text-t p{
+        font-size: 1.3rem;
+        font-family: var(--font-famay);
+        padding: 3rem;
       }
   }
 
@@ -278,6 +296,12 @@ li{
 
     .photo-content p, #modal-text p{
       font-size: 1rem;
+    }
+
+    .text-t p{
+      font-size: 2rem;
+      font-family: var(--font-famay);
+      padding: 3rem;
     }
 
   }
@@ -367,5 +391,10 @@ li{
         font-size: 1.5rem;
       }
 
+      .text-t p{
+        font-size: 3rem;
+        font-family: var(--font-famay);
+        padding: 3rem;
+      }
       
 }

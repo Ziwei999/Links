@@ -275,7 +275,7 @@ let renderArticles = (data) =>{
             <li  class="flip-card">
                  <div class="content">
                     <div class="card-front">
-                        <div>${block.description_html ?block.description_html:'<p>Description unavailable!</p>'}</div>
+                        <div class="text-t">${block.description_html ?block.description_html:'<p>Description unavailable!</p>'}</div>
                        
                     </div>
                     <div class="card-back">
